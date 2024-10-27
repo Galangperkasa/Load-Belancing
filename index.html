@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Catatan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Load Belancing</h1>
+
+        <div class="note priority-blue">
+            <div class="note-title">Setting Router 1</div>
+            <div class="note-content">
+<p>eth 1 = ISP <br>
+eth 2 & 3 = Mengarah ROUTER 2 <br>
+eth 4 = Remote Control <br>
+- KONFIGURASI<br>
+1. + DHCP Client eth 1 (internet) <br>
+2. + IP Address eth 2 & 3 (beda  network) <br>
+3. + DNS 8.8.8.8 + 8.8.4.4 ✓Alow Remote <br>
+4. + NAT (eth 1) <br>
+5. + DHCP Server eth 2 & 3</p>
+            </div>
+        </div>
+
+        <div class="note priority-blue">
+            <div class="note-title">Setting Router 2</div>
+            <div class="note-content">
+<p>eth 1 & 2 = Internet dari ROUTER 1 <br>
+eth 3 = Client / Remote Control<br>
+- KONFIGURASI<br>
+1. + DHCP Client (eth 1 & 2)<br>
+2. + IP Address eth 3 (client beda network) <br>
+3. + DNS 8.8.8.8 + 8.8.4.4 ✓Alow Remote  <br>
+4. + 2 NAT (eth 1 & 2) <br>
+5. Setting IP Client (Sampai akses internet) <br>
+6. Tes ping CMD</p>
+            </div>
+        </div>
+
+        <div class="note priority-red">
+            <div class="note-title">Setting Load Belancing</div>
+            <div class="note-content">
+ <p>- Mangle Rule <br>
+ - Routes <br>
+ - Queue </p>
+            </div>
+        </div>
+        
+        <div class="note priority-green">
+            <div class="note-title">MANGLE RULE</div>
+            <div class="note-content">
+ <p>1 & 2 <br>
+- General <br>
+ Chain : Perouting <br>
+In Interface : eth 3 ( CLIENT ) <br>
+Connection Mark : no - mark <br>
+- Advanced <br>
+Per Connection Classifien : [ both address and ports ]
+[  2  ] / [  0  ] <br>
+- Action <br>
+Action : mark connection <br>
+New Connection Mark : internet 1 (BUAT LAGI "internet 2")<br>
+<br>
+
+3 & 4 <br>
+- General <br>
+Chain : Perouting <br>
+In Interface : eth 3 ( CLIENT ) <br>
+Connection Mark : internet 1 (BUAT LAGI "internet 2") <br>
+- Action <br>
+Action : mark routing <br>
+New Routing Mark : ke internet 1 (BUAT LAGI "ke internet 2")<br>
+<br>
+
+5 & 6 <br>
+- General <br>
+Chain : Perouting <br>
+In Interface : eth 1 & 2 ( INTERNET ) <br>
+Connection Mark : no - mark <br>
+- Action <br>
+Action : mark connection <br>
+New Connection Mark : internet 1 (BUAT LAGI "internet 2")<br>
+<br>
+
+7 & 8 <br>
+- General <br>
+Chain : output <br>
+Connection Mark : internet 1 (BUAT LAGI "internet 2")<br>
+- Action
+Action : mark routing <br>
+New Routing Mark : ke internet 1 (BUAT LAGI "ke internet 2")<br>
+</p>
+            </div>
+        </div>
+        
+        <div class="note priority-blue">
+            <div class="note-title">ROUTES</div>
+            <div class="note-content">
+ <p>
+Gateway : 192.168.2.1 (IP DHCP ETH 1) <br>
+Check Gateway : ping <br>
+Type : Unicast <br>
+Distance : 1 (default) <br>
+Routing Mark : ke internet 1 <br>
+<br>
+Gateway : 192.168.3.1 (IP DHCP ETH 2) <br>
+Check Gateway : ping <br>
+Type : Unicast <br>
+Distance : 1 (default) <br>
+Routing Mark : ke internet 2 <br>
+<br>
+Buat 2 lagi sama (tapi tidak usah isi RoutingMark)
+ </p>
+            </div>
+        </div>
+        
+        <div class="note priority-red">
+  <div class="note-title">QUEUE</div>
+  <div class="note-content">
+    <p>BUAT 2 QUEUE UNTUK TARGET ETH 1 & 2 <br>
+    DI SPEED TEST <br>
+    (JIKA BERUBAH-UBAH WARNA = BERHASIL)</p>
+  </div>
+</div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: black;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            margin-bottom: 30px;
+        }
+
+        .note {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .note-title {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid black;
+        }
+
+        .note-content {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .priority-blue {
+            border: 2px solid blue;
+        }
+
+        .priority-red {
+            border: 2px solid red;
+        }
+
+        .priority-green {
+            border: 2px solid green;
+        }
