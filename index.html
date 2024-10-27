@@ -52,7 +52,7 @@ eth 3 = Client / Remote Control<br>
         <div class="note priority-green">
             <div class="note-title">MANGLE RULE</div>
             <div class="note-content">
- <p>1 & 2 <br>
+ <p>1<br>
 - General <br>
  Chain : Perouting <br>
 In Interface : eth 3 ( CLIENT ) <br>
@@ -65,7 +65,7 @@ Action : mark connection <br>
 New Connection Mark : internet 1 (BUAT LAGI "internet 2")<br>
 <br>
 
-3 & 4 <br>
+2<br>
 - General <br>
 Chain : Perouting <br>
 In Interface : eth 3 ( CLIENT ) <br>
@@ -75,7 +75,7 @@ Action : mark routing <br>
 New Routing Mark : ke internet 1 (BUAT LAGI "ke internet 2")<br>
 <br>
 
-5 & 6 <br>
+4<br>
 - General <br>
 Chain : Perouting <br>
 In Interface : eth 1 & 2 ( INTERNET ) <br>
@@ -85,11 +85,11 @@ Action : mark connection <br>
 New Connection Mark : internet 1 (BUAT LAGI "internet 2")<br>
 <br>
 
-7 & 8 <br>
+5<br>
 - General <br>
 Chain : output <br>
 Connection Mark : internet 1 (BUAT LAGI "internet 2")<br>
-- Action
+- Action <br>
 Action : mark routing <br>
 New Routing Mark : ke internet 1 (BUAT LAGI "ke internet 2")<br>
 </p>
